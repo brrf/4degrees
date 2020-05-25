@@ -8,7 +8,7 @@ const functions = {
 			email: 'moshe@gmail.com',
 			note: 'a note exists',
 		};
-		return fetch('http://localhost:5000/new_contact', {
+		return fetch('http://localhost:5000/add_contact', {
 			method: 'POST',
 			body: JSON.stringify(body),
 			headers: {
@@ -27,7 +27,7 @@ const functions = {
 			email: 'moshe@',
 			note: 'a note exists',
 		};
-		return fetch('http://localhost:5000/new_contact', {
+		return fetch('http://localhost:5000/add_contact', {
 			method: 'POST',
 			body: JSON.stringify(body),
 			headers: {
@@ -46,7 +46,7 @@ const functions = {
 			email: 'moshe@gmail.com',
 			note: '',
 		};
-		return fetch('http://localhost:5000/new_contact', {
+		return fetch('http://localhost:5000/add_contact', {
 			method: 'POST',
 			body: JSON.stringify(body),
 			headers: {
@@ -65,7 +65,7 @@ const functions = {
 			email: 'moshe@gmail.com',
 			note: 'a brief note',
 		};
-		return fetch('http://localhost:5000/new_contact', {
+		return fetch('http://localhost:5000/add_contact', {
 			method: 'POST',
 			body: JSON.stringify(body),
 			headers: {

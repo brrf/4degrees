@@ -101,17 +101,17 @@ function newContact(event) {
 	http.onreadystatechange = function () {
 		if (http.readyState == 4) {
 			const response = JSON.parse(http.responseText)
-			if (response.error) {
-				
+			if (response.error) {				
 				flashMessage.innerHTML = response.error
 			} else {
 				contactList.addContact(body);
+				name.innerText = ''
 			}
 		}
 	};
 	
 	http.send(JSON.stringify(body));
-	return false;
+	// return false;
 }
 
 
