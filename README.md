@@ -17,7 +17,7 @@ Basic assumptions:
 2. Data is not private. HTTP protocol used.
 3. CSS selectors use basic elements(h1, body, form). Collisions may occur if application is built out further.
 4. All the contacts are stored in an array of objects.
-5. The array can be updated through an addContact and deleteContact method. There is now "updateContact" functionality.
+5. The array can be updated through an addContact and deleteContact method. There is no "updateContact" functionality.
 6. The DOM updates after every alteration to the contacts array.
 7. There is one API route that is used to validate new contacts to ensure both name & email are provided. Note is optional.
 
