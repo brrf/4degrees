@@ -113,35 +113,7 @@ function newContact(event) {
 	return false;
 }
 
-// function newContact(event) {
-// 	event.preventDefault();
-// 	const name = document.getElementById('new-contact-form').elements['name']
-// 		.value;
-// 	const email = document.getElementById('new-contact-form').elements['email']
-// 		.value;
-// 	const note = document.getElementById('new-contact-form').elements[
-// 		'note'
-// 	].value;
 
-// 	let body = {
-// 		name,
-// 		email,
-// 		note,
-// 	};
-// 	fetch('http://localhost:5000/new_contact', {
-// 		method: 'POST',
-// 		body: JSON.stringify(body),
-// 		headers: {
-// 			'Content-Type': 'application/json',
-// 		},
-// 	})
-// 		.then(function (res) {
-// 			return res.json();
-// 		})
-// 		.then(function (resObject) {
-// 			
-// 		});
-// }
-
+//initial function calls
 interface.setUpEventListeners();
 interface.populateTable();
