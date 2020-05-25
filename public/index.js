@@ -60,6 +60,15 @@ let interface = {
 		deleteButton.className = 'deleteButton';
 		return deleteButton;
 	},
+	clearInputFields: function () {
+		const nameField = document.querySelector('.name-input');
+		const emailField = document.querySelector('.email-input');
+		const noteField = document.querySelector('.note-input');
+
+		nameField.value = '';
+		emailField.value = '';
+		noteField.value = '';
+	}
 };
 
 ////API validation section (can be moved to new file eventually)
@@ -96,7 +105,7 @@ function newContact(event) {
 	};
 
 	let http = new XMLHttpRequest();
-	http.open('POST', 'http://localhost:5000/new_contact', true);
+	http.open('POST', 'http://localhost:5000/add_contact', true);
 	http.setRequestHeader('Content-type', 'application/json');
 	http.onreadystatechange = function () {
 		if (http.readyState == 4) {
@@ -105,7 +114,7 @@ function newContact(event) {
 				flashMessage.innerHTML = response.error
 			} else {
 				contactList.addContact(body);
-				name.innerText = ''
+				interface.clearInputFields();
 			}
 		}
 	};

@@ -32,7 +32,7 @@ app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.post('/new_contact', (req, res) => {
+app.post('/add_contact', (req, res) => {
   //regular expression for email matches string *@*
   let testRegex = /.+@.+/;
   const { name, email } = req.body;
