@@ -18,16 +18,92 @@ body {
 	-ms-text-size-adjust: none;
 }
 
-h1 {
-	color: crimson;
+body {
+	background-color: teal;
 }
 
-table {
+#app-container {
+	padding: 50px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+h1 {
+	color: black;
+	margin-bottom: 50px;
+}
+
+#table-container {
+	min-height: 150px;
 	width: 70%;
 	margin: auto;
+	background-color: grey;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 25px;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+		0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 1vw;
+	padding: 10px;
+	position: relative;
+	background-color: #fbfcfd;
+}
+
+#empty {
+	margin-top: 8px;
+}
+
+table,
+tbody {
+	width: 100%;
 }
 
 th,
 td {
 	border: 1px solid black;
+	/*width: 30%;*/
+}
+
+button {
+	background-color: #ae2172;
+	padding: 8px;
+}
+
+#flash {
+	background-color: white;
+	color: crimson;
+	margin-bottom: 5px;
+}
+
+#new-contact-container {
+	min-height: 150px;
+	width: 70%;
+	margin: auto;
+	background-color: grey;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 25px;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+		0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+	border-radius: 1vw;
+	padding: 10px;
+	position: relative;
+	background-color: #fbfcfd;
+}
+
+form {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+input,
+textarea {
+	height: 50px;
+	border-radius: 2;
+	margin: 5px;
 }

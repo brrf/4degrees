@@ -1,5 +1,4 @@
-let tableContainer = document.querySelector('table');
-
+//object that manages contacts array;
 let contactList = {
 
 	contacts: [],
@@ -18,34 +17,7 @@ let contactList = {
 	},
 };
 
-// let handlers = {
-// 	displayContacts: function() {
-// 		interface.populateTable();
-// 	},
-// 	// toggleAll: function() {
-// 	// 	todoList.toggleAll();
-// 	// },
-// 	addContact: function() {
-// 		const todoText = document.querySelector('.addTodoText').value;
-// 		contactList.addContact(todoText);
-// 	},
-// 	deleteTodo: function(position) {
-// 		todoList.deleteTodo(position);
-// 		position = '';
-// 	},
-// 	changeTodo: function() {
-// 		var changeTodoPosition = document.querySelector('.changeTodoPosition').value;
-// 		var changeTodoText = document.querySelector('.changeTodoText').value;
-// 		todoList.changeTodo(changeTodoPosition - 1, changeTodoText);
-// 		changeTodoPosition = '';
-// 		changeTodoText = '';
-// 	},
-// 	toggleCompleted: function() {
-// 		var toggleCompletedPosition = document.querySelector('.toggleCompletedPosition').value;
-// 		todoList.toggleCompleted(toggleCompletedPosition - 1);
-// 	}
-// }
-
+//object that updates interface when contacts change
 let interface = {
 	populateTable: function () {
 		let tableContainer = document.querySelector('table');
@@ -75,7 +47,7 @@ let interface = {
 	setUpEventListeners: function () {
 		let entireList = document.querySelector('table')
 		entireList.addEventListener('click', function(event) {
-		console.log('event')
+		
 		if (event.target.nodeName !== 'BUTTON') {
 			return;
 		}
@@ -90,7 +62,9 @@ let interface = {
 	},
 };
 
-//add event listener for new contact button
+////API validation section (can be moved to new file eventually)
+
+//add event listener for the new contact button
 let submitButton = document.querySelector('form button');
 submitButton.addEventListener('click', function (event) {
 	event.preventDefault();
@@ -103,37 +77,71 @@ submitButton.addEventListener('click', function (event) {
 
 function newContact(event) {
 	event.preventDefault();
-	const name = document.getElementById('new-contact-form').elements['name']
-		.value;
+	const name = document.getElementById('new-contact-form').elements[
+		'name'
+	].value;
 	const email = document.getElementById('new-contact-form').elements['email']
 		.value;
-	const note = document.getElementById('new-contact-form').elements[
-		'note'
-	].value;
+	const note = document.getElementById('new-contact-form').elements['note']
+		.value;
 
-	let body = {
+	const flashMessage = document.getElementById('flash');
+	flashMessage.innerHTML = '';
+
+	const body = {
 		name,
 		email,
 		note,
 	};
-	fetch('http://localhost:5000/new_contact', {
-		method: 'POST',
-		body: JSON.stringify(body),
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	})
-		.then(function (res) {
-			return res.json();
-		})
-		.then(function (resObject) {
-			if (resObject.error) {
-				console.log('error')
+
+	let http = new XMLHttpRequest();
+	http.open('POST', 'http://localhost:5000/new_contact', true);
+	http.setRequestHeader('Content-type', 'application/json');
+	http.onreadystatechange = function () {
+		if (http.readyState == 4) {
+			const response = JSON.parse(http.responseText)
+			if (response.error) {
+				
+				flashMessage.innerHTML = response.error
 			} else {
 				contactList.addContact(body);
 			}
-		});
+		}
+	};
+	
+	http.send(JSON.stringify(body));
+	return false;
 }
+
+// function newContact(event) {
+// 	event.preventDefault();
+// 	const name = document.getElementById('new-contact-form').elements['name']
+// 		.value;
+// 	const email = document.getElementById('new-contact-form').elements['email']
+// 		.value;
+// 	const note = document.getElementById('new-contact-form').elements[
+// 		'note'
+// 	].value;
+
+// 	let body = {
+// 		name,
+// 		email,
+// 		note,
+// 	};
+// 	fetch('http://localhost:5000/new_contact', {
+// 		method: 'POST',
+// 		body: JSON.stringify(body),
+// 		headers: {
+// 			'Content-Type': 'application/json',
+// 		},
+// 	})
+// 		.then(function (res) {
+// 			return res.json();
+// 		})
+// 		.then(function (resObject) {
+// 			
+// 		});
+// }
 
 interface.setUpEventListeners();
 interface.populateTable();

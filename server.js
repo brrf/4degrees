@@ -39,10 +39,8 @@ app.post('/new_contact', (req, res) => {
   const { name, email } = req.body;
   //form validation
   if (!name || !email) {
-    console.log('error here');
     return res.json({ error: 'Please fill out required fields' });
   } else if (!testRegex.test(email)) {
-    console.log('error regex');
     return res.json({ error: 'Please submit a valid email' });
   } else {
     return res.json({ error: false });

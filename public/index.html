@@ -7,38 +7,45 @@
 		<link rel="stylesheet" type="text/css" href="./index.css" />
 	</head>
 	<body>
-		<h1>Welcome!</h1>
-		<table></table>
-		<div id="empty"></div>
-		<div id="new-contact-container">
-			<form id="new-contact-form">
-				<input
-					class="form-half-width first"
-					data-type="text"
-					name="name"
-					maxlength="50"
-					placeholder="Name"
-					autofocus
-					required
-				/>
-				<input
-					class="form-full-width"
-					type="email"
-					name="email"
-					placeholder="E-mail"
-					maxlength="300"
-					required
-				/>
-				<textarea
-					class="form-full-width"
-					name="note"
-					placeholder="Please type your note here..."
-					cols="30"
-					rows="10"
-					maxlength="5000"
-				></textarea>
-				<button>Add New Contact</button>
-			</form>
+		<div id="app-container">
+			<h1>Contact Tracer</h1>
+			<div id="table-container">
+				<h2>Contact List</h2>
+				<table></table>
+				<div id="empty"></div>
+			</div>
+			<div id="flash"></div>
+			<div id="new-contact-container">
+				<h2>Add new contact</h2>
+				<form id="new-contact-form">
+					<input
+						class="form-half-width first"
+						data-type="text"
+						name="name"
+						maxlength="50"
+						placeholder="Name"
+						autofocus
+						required
+					/>
+					<input
+						class="form-full-width"
+						type="email"
+						name="email"
+						placeholder="E-mail"
+						maxlength="300"
+						required
+					/>
+					<textarea
+						class="form-full-width"
+						name="note"
+						placeholder="Please type your note here..."
+						cols="30"
+						rows="10"
+						maxlength="5000"
+					></textarea>
+					<button>Add New Contact</button>
+				</form>
+			</div>
 		</div>
 
 		<script type="text/javascript" src="./index.js"></script>
