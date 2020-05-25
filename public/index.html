@@ -8,25 +8,40 @@
 	</head>
 	<body>
 		<h1>Welcome!</h1>
-		<table>
-			<!-- <tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Note</th>
-			</tr>
-			<tr>
-				<td>Jill</td>
-				<td>Smith</td>
-				<td>50</td>
-			</tr>
-			<tr>
-				<td>Eve</td>
-				<td>Jackson</td>
-				<td>94</td>
-			</tr> -->
-		</table>
-		<button>Add New Contact</button>
+		<table></table>
+		<div id="empty"></div>
+		<div id="new-contact-container">
+			<form id="new-contact-form">
+				<input
+					class="form-half-width first"
+					data-type="text"
+					name="name"
+					maxlength="50"
+					placeholder="Name"
+					autofocus
+					required
+				/>
+				<input
+					class="form-full-width"
+					type="email"
+					name="email"
+					placeholder="E-mail"
+					maxlength="300"
+					required
+				/>
+				<textarea
+					class="form-full-width"
+					name="note"
+					placeholder="Please type your note here..."
+					cols="30"
+					rows="10"
+					maxlength="5000"
+				></textarea>
+				<button>Add New Contact</button>
+			</form>
+		</div>
 
 		<script type="text/javascript" src="./index.js"></script>
+		<!-- 	<script type="text/javascript" src="./new_contact.js"></script> -->
 	</body>
 </html>

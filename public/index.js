@@ -1,79 +1,26 @@
 let tableContainer = document.querySelector('table');
 
-let contacts = [
-	{
-		name: 'Moshe',
-		email: 'moshe@g',
-		note: 'hello there',
+let contactList = {
+
+	contacts: [],
+
+	addContact: function ({name, email, note}) {
+		this.contacts.push({
+			name,
+			email,
+			note
+		});
+		interface.populateTable();
 	},
-	{
-		name: 'Moshe1',
-		email: 'moshe@g',
-		note: 'hello there',
+	deleteContact: function(position) {
+		this.contacts.splice(position, 1);
+		interface.populateTable();
 	},
-	{
-		name: 'Moshe2',
-		email: 'moshe@g',
-		note: 'hello there',
-	},
-];
-
-// contacts.forEach(contact => {
-// 	tableContent += contact.name;
-// });
-
-// console.log(tableContent);
-
-// let contactList = {
-
-// 	contacts: [],
-
-// 	addContact: function ({name, email, note}) {
-// 		this.contacts.push({
-// 			name,
-// 			email,
-// 			note
-// 		});
-// 		interface.displayContacts();
-// 	},
-// 	// changeTodo: function (position, todoText) {
-// 	// 	this.todos[position].todoText = todoText;
-// 	// 	interface.displayContacts();
-// 	// },
-// 	deleteContact: function(position) {
-// 		this.contacts.splice(position, 1);
-// 		interface.displayContacts();
-// 	},
-
-// 	// toggleCompleted: function(position) {
-// 	// 	this.todos[position].completed = !this.todos[position].completed;
-// 	// 	interface.displayContacts();
-
-// 	// },
-// 	// toggleAll: function() {
-// 	// 	let items = this.todos;
-// 	// 	let allChecked = true;
-
-// 	// 	items.forEach (function(item) {
-// 	// 		if (!item.completed) {
-// 	// 			allChecked = false;
-// 	// 		}
-// 	// 	});
-// 	// 	items.forEach(function(item) {
-// 	// 		if (!allChecked) {
-// 	// 			item.completed = true;
-// 	// 		}
-// 	// 		else {
-// 	// 			item.completed = false;
-// 	// 		}
-// 	// 	})
-// 	// 	interface.displayContacts();
-// 	// },
-// }
+};
 
 // let handlers = {
 // 	displayContacts: function() {
-// 		interface.displayContacts();
+// 		interface.populateTable();
 // 	},
 // 	// toggleAll: function() {
 // 	// 	todoList.toggleAll();
@@ -102,13 +49,19 @@ let contacts = [
 let interface = {
 	populateTable: function () {
 		let tableContainer = document.querySelector('table');
+		let emptyList = document.getElementById('empty');
 
 		//remove all current table fields and populate with new data
 		tableContainer.innerHTML = '';
 		tableContainer.innerHTML +=
 			'<tr><th>Name</th><th>Email</th><th>Note</th></tr>';
+		emptyList.innerHTML = '';
 
-		contacts.forEach((contact, position) => {
+		if (contactList.contacts.length === 0) {
+			emptyList.innerHTML = 'Your contact list is empty!';
+		}	
+
+		contactList.contacts.forEach((contact, position) => {
 			let newRow = document.createElement('tr');
 			newRow.innerHTML = `<td>${contact.name}</td><td>${contact.email}</td><td>${contact.note}</td>`;
 			newRow.id = position;
@@ -119,53 +72,68 @@ let interface = {
 			);
 		}, this);
 	},
-	// displayContacts: function () {
-	// 	let entireList = document.querySelector('.entire-list');
-	// 	entireList.innerHTML = '';
-
-	// 	if (todoList.todos.length === 0) {
-	// 		entireList.innerHTML = 'Your To-do list is empty!';
-	// 	}
-	// 	todoList.todos.forEach(function(todo, position) {
-	// 		var newLi  = document.createElement('li');
-	// 		newLi.id = position;
-	// 		entireList.appendChild(newLi);
-
-	// 		if (todo.completed) {
-	// 			newLi.textContent = `(x) ${todo.todoText}`
-	// 		} else {
-	// 			newLi.textContent = `( ) ${todo.todoText}`
-	// 		}
-
-	// 		entireList.childNodes[position].appendChild( this.createDeleteButton() );
-	// 	}, this)
-	// },
-	// 	setUpEventListeners: function () {
-	// 		var entireList = document.querySelector('.entire-list')
-	// 		entireList.addEventListener('click', function(event) {
-
-	// 		if (event.target.nodeName !== 'BUTTON') {
-	// 			return;
-	// 		}
-	// 		handlers.deleteTodo(event.target.parentNode.id);
-	// 		});
-	// 	},
-
+	setUpEventListeners: function () {
+		let entireList = document.querySelector('table')
+		entireList.addEventListener('click', function(event) {
+		console.log('event')
+		if (event.target.nodeName !== 'BUTTON') {
+			return;
+		}
+		contactList.deleteContact(event.target.parentNode.id);
+		});
+	},
 	createDeleteButton: function () {
 		const deleteButton = document.createElement('button');
 		deleteButton.textContent = 'delete';
 		deleteButton.className = 'deleteButton';
 		return deleteButton;
 	},
-
-	// 	populate: function populate(n) {
-	// 		for (let i = 0; i <= n; i++) {
-	// 			todoList.addTodo(`item: ${i+1}`);
-	// 		}
-	// 	}
 };
 
-// interface.populate(4)
-// interface.setUpEventListeners();
+//add event listener for new contact button
+let submitButton = document.querySelector('form button');
+submitButton.addEventListener('click', function (event) {
+	event.preventDefault();
+	if (event.target.nodeName !== 'BUTTON') {
+		return;
+	} else {
+		newContact(event);
+	}
+});
 
+function newContact(event) {
+	event.preventDefault();
+	const name = document.getElementById('new-contact-form').elements['name']
+		.value;
+	const email = document.getElementById('new-contact-form').elements['email']
+		.value;
+	const note = document.getElementById('new-contact-form').elements[
+		'note'
+	].value;
+
+	let body = {
+		name,
+		email,
+		note,
+	};
+	fetch('http://localhost:5000/new_contact', {
+		method: 'POST',
+		body: JSON.stringify(body),
+		headers: {
+			'Content-Type': 'application/json',
+		},
+	})
+		.then(function (res) {
+			return res.json();
+		})
+		.then(function (resObject) {
+			if (resObject.error) {
+				console.log('error')
+			} else {
+				contactList.addContact(body);
+			}
+		});
+}
+
+interface.setUpEventListeners();
 interface.populateTable();

@@ -3,9 +3,11 @@
 const express = require('express');
 const cors = require('cors');
 // require('dotenv').config();
+const bodyParser = require('body-parser');
 const path = require('path');
 
 const app = express();
+app.use(bodyParser.json());
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
@@ -20,7 +22,7 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: ['https://localhost:5000'],
+    origin: ['http://localhost:5000'],
   })
 );
 
@@ -29,6 +31,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/home', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.post('/new_contact', (req, res) => {
+  //regular expression for email matches string *@*
+  let testRegex = /.+@.+/;
+  const { name, email } = req.body;
+  //form validation
+  if (!name || !email) {
+    console.log('error here');
+    return res.json({ error: 'Please fill out required fields' });
+  } else if (!testRegex.test(email)) {
+    console.log('error regex');
+    return res.json({ error: 'Please submit a valid email' });
+  } else {
+    return res.json({ error: false });
+  }
 });
 
 //404 Not Found Middleware
