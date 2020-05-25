@@ -75,6 +75,7 @@ submitButton.addEventListener('click', function (event) {
 	}
 });
 
+//API request to validate form
 function newContact(event) {
 	event.preventDefault();
 	const name = document.getElementById('new-contact-form').elements[

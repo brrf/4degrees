@@ -20,11 +20,6 @@ const functions = {
 			.then(res => res.json())
 			.catch(err => console.log(err));
 	},
-	test: function test() {
-		return fetch('https://swapi.dev/api/people/1')
-			.then(res => res.json())
-			.catch(err => console.log(err));
-	},
 };
 
 module.exports = functions;
